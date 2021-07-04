@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>RyPy</title>
+</head>
+
+<body>
+  <div id="app">
+    <div class="search_bar">
+      <img src="./assets/img/rypy_black.svg" class="logo">
+      <input v-model="link" @keyup.enter="enviarLink()">
+      <button @click="enviarLink()">Buscar</button>
+    </div>
+    <div class="loader" v-if="this.searching"></div>
+    <div class="videos_container" v-if="!this.searching">
+      <img v-if="this.url" class="video_img" :src="this.url">
+      <div class="video_title" v-if="this.title">
+        {{title}}
+      </div>
+      <div class="video_info">
+        
+        <table class="video_formats" v-if="this.title">
+          <tr>
+            <th>Resolução</th>
+            <th>Formato</th>
+          </tr>
+          <tr v-for="dado in dados">
+            <td>{{dado.res}}</td>
+            <td>{{dado.mime_type}}</td>
+            <td>
+              <a class="video_download" @click="baixarVideo(dado.itag)">Baixar</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="program_stats_holder">
+      <div class="program_stats">
+        <span>[Status] {{programStats}}</span>
+        <br>
+        <span v-if="download.downloading || download.downloaded">{{download.downloadedSize}}mb / {{download.fileSize}}mb</span>
+      </div>
+    </div>
+    
+    <custom-modal ref="modal">
+      <div v-if="!modalAviso">
+        <h2>{{modalBody}}</h2>
+        <hr>
+        <button class="modal_btn" @click="abrirLocal">Abrir Local</button>
+        <button class="modal_btn" @click="abrirArquivo">Abrir Arquivo</button>
+      </div>
+      <div v-else>
+        <h2>Link inválido!</h2>
+      </div>
+    </custom-modal>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./eel.js"></script>
+  <script src="./assets/js/script.js" type="module"></script>
+</body>
+
+</html>

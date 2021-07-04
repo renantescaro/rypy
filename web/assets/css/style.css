@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+body, ul, li, table {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline-block;
+}
+
+* {
+    font-family: "Noto Sans JP";
+}
+
+.search_bar {
+    background: #1b1b1b;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.search_bar input {
+    background: transparent;
+    color: #f2f2f2;
+    border-style: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0 20px;
+    padding: 0 2px;
+    width: 500px;
+    transition: 0.3s;
+}
+
+.search_bar input:focus, input:focus-visible {
+    outline: none;
+    padding-bottom: 5px;
+    border-bottom: 2px solid white;
+}
+
+.search_bar button {
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 5px 10px;
+}
+
+.search_bar button:active {
+    background: rgba(255, 255, 255, 0.2)
+}
+
+.videos_container {
+    width: 500px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 200px auto;
+    grid-gap: 10px;
+}
+
+.video_img {
+    width: 200px;
+    grid-column: 1;
+    align-self: center;
+}
+
+.video_info {
+    height: 130px;
+    overflow-y: auto;
+    grid-column: 2;
+}
+
+.video_title {
+    margin: 0;
+    padding: 0 0 5px 0;
+    font-size: 16px;
+    grid-column: span 2;
+    grid-row: 1;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 2px solid hsla(0, 0%, 11%, 0.1);
+}
+
+.video_download {
+    margin-left: 10px;
+    cursor: pointer;
+    background: transparent;
+    border-style: none;
+    color: #1b1b1b;
+    border: 2px solid #1b1b1b;
+    padding: 5px 10px;
+    transition: 0.3s;
+}
+
+.video_download:active {
+    background: hsla(0, 0%, 11%, 0.20);
+}
+
+.video_download:hover {
+    color: #ffffff;
+    /* border: 2px solid #ffffff; */
+    background: #1b1b1b;
+    transition: 0.3s;
+}
+
+.video_formats {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.video_formats tr {
+    height: 50px;
+}
+
+.video_formats tr>td {
+    border-bottom: 1px solid hsla(0, 0%, 11%, 0.1);
+}
+
+.video_formats tr:first-child {
+    height: initial;
+}
+
+.video_formats tr:last-child>td {
+    border-bottom: none;
+}
+
+.modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+}
+
+.modal.ativo {
+    display: flex;
+}
+
+.modal::before {
+    content: "";
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal_container {
+    position: relative;
+    margin: 80px auto;
+    background: #ffffff;
+    border: 2px solid black;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 800px;
+    animation: fadeInDown 0.3s forwards;
+}
+
+.modal_close {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 15px;
+    font-weight: bolder;
+    border-radius: 50%;
+    border: 2px solid black;
+    background: white;
+}
+
+.modal_btn {
+    margin-left: 0 10px;
+    cursor: pointer;
+    background: transparent;
+    border-style: none;
+    color: #1b1b1b;
+    border: 2px solid #1b1b1b;
+    padding: 5px 10px;
+    transition: 0.3s;
+}
+
+.logo {
+    width: 100px;
+    border: solid 2px white;
+}
+
+.program_stats_holder{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    /* height: 50px; */
+    background-color: #1b1b1b;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+.program_stats{
+    padding: 20px;
+}
+.program_stats span{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.loader{
+    margin: 100px auto;
+    border: 10px solid #f1f1f1;
+    border-top: 10px solid #1b1b1b;
+    border-radius: 540%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1.3s linear infinite;
+}
+
+/* Animações do Vue */
+
+.modal-enter {
+    animation: fadeInDown 0.3s forwards;
+}
+
+.modal-leave-to .modal_container {
+    animation: fadeOutUp 0.3s forwards;
+}
+
+.modal-enter, .modal-leave-to {
+    opacity: 0;
+}
+
+.modal-enter-active, .modal-leave-to {
+    transition: 0.3s;
+}
+
+/* KeyFrames */
+
+@keyframes fadeInDown {
+    from {
+        transform: translate3d(0, -30px, 0);
+    }
+    to {
+        transform: translate3d(0, 0px, 0);
+    }
+}
+
+@keyframes fadeOutUp {
+    from {
+        transform: translate3d(0, 0px, 0);
+    }
+    to {
+        transform: translate3d(0, -30px, 0);
+    }
+}
+
+@keyframes spin{
+    0%{transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+}
