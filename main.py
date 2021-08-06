@@ -92,8 +92,9 @@ def downloadItag(link,itag):
     if('realItag' in locals()):
         a = Converter(dirPath,fileName)
         a.convert()
-
-    return [dirPath,fileName]
+        return [dirPath,fileName]
+    else:
+        return [dirPath,fileName]
 
 @eel.expose
 def openLocation(location, fileName = ' '):
